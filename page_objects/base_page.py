@@ -36,7 +36,8 @@ class BasePage:
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.element_to_be_clickable(locator))
 
-    def _is_displayed(self, locator: tuple) -> bool:
+    def _is_displayed(self, locator: tuple, time=10) -> bool:
+        self._wait_until_element_is_visible(locator, time)
         try:
             return self._find(locator).is_displayed()
         except NoSuchElementException:
