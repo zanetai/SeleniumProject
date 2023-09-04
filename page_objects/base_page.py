@@ -3,6 +3,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import Select
 
 
 class BasePage:
@@ -44,6 +45,11 @@ class BasePage:
     def _get_text(self, locator: tuple, time=10) -> str:
         self._wait_until_element_is_visible(locator, time)
         return self._find(locator).text
+
+    def _dropdown(self, locator: tuple, value: str, time=10):
+        self._wait_until_element_is_visible(locator, time)
+        drop = Select(self._find(locator))
+        drop.select_by_value(value)
 
     @property
     def current_url(self) -> str:
