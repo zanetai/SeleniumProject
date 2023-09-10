@@ -7,6 +7,7 @@ class MainPage(BasePage):
     __url = "https://kawaiherbata.com/"
     __login_button = (By.CLASS_NAME, "link-login-text")
     __logout_button = (By.CLASS_NAME, "link-logout-text")
+    __coffee_button = (By.XPATH, "//div[@id='header-menu']//ul[@class='menu']//a[@title='Kawy']/h2[.='Kawy']")
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
@@ -25,3 +26,6 @@ class MainPage(BasePage):
 
     def execute_logout(self):
         super()._click(self.__logout_button)
+
+    def go_to_coffee_page(self):
+        super()._click(self.__coffee_button)
