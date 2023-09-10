@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from page_objects.base_page import BasePage
@@ -8,13 +6,16 @@ from page_objects.base_page import BasePage
 class CoffeePage(BasePage):
     __url = "https://kawaiherbata.com/kawy-1/"
     __add_to_cart_advocat_button = (By.XPATH,
-                                    "//div[@id='content']/div[@class='container']/div[@class='row']/div[2]/div[3]/div[@class='row']/div[1]/div[@class='pb-shadow']/div[@class='pb-shadow-inner']/div[@class='pb-price']/span[@class='add-to-cart']")
+                                    "//div[@id='content']/div[@class='container']/div[@class='row']/div[2]/div["
+                                    "3]/div[@class='row']/div[1]/div[@class='pb-shadow']/div["
+                                    "@class='pb-shadow-inner']/div[@class='pb-price']/span[@class='add-to-cart']")
     __grinding_select_form = (By.XPATH, "//select[@id='grindingSelect']")
     __packaging_select_form = (By.XPATH, "//select[@id='packagingSelect']")
     __quantity_select_form = (By.XPATH, "//select[@id='quantitySelect']")
     __add_to_cart_button = (By.CSS_SELECTOR, ".btn-addtocart-ajax-form")
     __cart_field = (By.ID, "headerCartPopup")
-    __go_to_cart_button = (By.CLASS_NAME, "col-12 col-md-6 text-left")
+    __go_to_cart_button = (By.XPATH, "//div[@id='top_pasek']/div[@class='row']//div[@class='col-12 col-md-6 "
+                                     "text-left']/a[@href='/koszyk']")
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
@@ -34,6 +35,7 @@ class CoffeePage(BasePage):
         super()._click(self.__add_to_cart_button)
 
     def is_card_field_displayed(self) -> bool:
+        super()._wait_until_element_is_visible(self.__cart_field)
         return super()._is_displayed(self.__cart_field)
 
     def go_to_cart(self):
