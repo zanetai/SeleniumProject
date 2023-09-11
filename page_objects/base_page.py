@@ -46,9 +46,9 @@ class BasePage:
         self._wait_until_element_is_visible(locator, time)
         return self._find(locator).text
 
-    def _get_value(self, locator: tuple, value: str, time=10) -> str:
+    def _get_attribute(self, locator: tuple, attribute: str, time=10) -> str:
         self._wait_until_element_is_visible(locator, time)
-        return self._find(locator).get_attribute(value)
+        return self._find(locator).get_attribute(attribute)
 
     def _dropdown(self, locator: tuple, value: str, time=10):
         self._wait_until_element_is_visible(locator, time)
